@@ -10,17 +10,23 @@ function redirect($url)
 
 // input handling
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   $errors= validation_data($_POST, $_FILES);
+
+    $success_message="Form submitted successfully!";
+
+    //validate data and store the returned errors into an array
+   $errors= validate_data($_POST, $_FILES);
 
     //checking for errors
-    if (!empty($errors)) {
-        // Store errors in session
-        $_SESSION["message"] = $errors;
-    } else {
-        $_SESSION["message"] = "Form submitted successfully!";
+    if (is_null($errors[0]))  // if the first value of the array is null since when there is no errors
+    {                         //validation function returns null
+        $_SESSION["success_message"] = $success_message;
+    }else{
+        $_SESSION["error_message"] = $errors;
     }
+
 
     // redirecting to view page
     redirect("form.php");
+    exit;
 }
 
