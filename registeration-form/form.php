@@ -9,7 +9,7 @@
 <body>
 
    <h2>Registration Form</h2>
-   <h3> hello </h3>
+   <h3> Hello </h3>
 
 
    <form method="POST" action="logic.php" enctype="multipart/form-data">
@@ -31,13 +31,17 @@
 
 <?php
 
-if (is_array($_SESSION["message"])) {
-    foreach ($_SESSION["message"] as $message) {
+if (isset($_SESSION["error_message"])) {
+    foreach ($_SESSION["error_message"] as $message) {
         echo "<p style='color:red;'>$message</p>";
     }
-} else {
-    echo "<p style='color:green'>{$_SESSION["message"]}</p>";
+} elseif (isset($_SESSION["success_message"])) {
+    echo "<p style='color:green'>{$_SESSION["success_message"]}</p>";
 }
+
+// unset all varaibles and destory the session
+session_unset();
+session_destroy();
 
    ?>
 
