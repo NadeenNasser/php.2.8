@@ -31,15 +31,21 @@
 
 <?php
 
-if (isset($_SESSION["error_message"])) {
-    foreach ($_SESSION["error_message"] as $message) {
+if (isset($_SESSION["data error message"])) {
+   foreach ($_SESSION["data error message"] as $message) {
         echo "<p style='color:red;'>$message</p>";
     }
-} elseif (isset($_SESSION["success_message"])) {
-    echo "<p style='color:green'>{$_SESSION["success_message"]}</p>";
+} elseif (isset($_SESSION["data success message"])) {
+    echo "<p style='color:green'>{$_SESSION["data success message"]}</p>";
 }
 
-// unset all varaibles and destory the session
+if(isset($_SESSION["image error message"])){
+    echo "<p style='color:red;'>{$_SESSION["image error message"]}</p>";
+}elseif(isset($_SESSION["image success message"])){
+    echo "<p style='color:green;'>{$_SESSION["image success message"]}</p>";
+}
+
+// unset all variables and destroy the session
 session_unset();
 session_destroy();
 
