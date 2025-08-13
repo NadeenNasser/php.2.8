@@ -20,22 +20,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $errors= validate_data($_POST, $_FILES);
 
     //checking for errors
-    if (is_array($errors))  // if the first value of the array is null since when there is no errors
-    {                         //validation function returns null
+    if (is_array($errors))
+    {
         $_SESSION["data error message"] = $errors;
     }else{
         $_SESSION["data success message"] = $success_message;
     }
 
     //save image
-    if(in_array("file isn't an image", $errors)){
-            $_SESSION["image error message"]= "File upload failed!";
-    } elseif (move_uploaded_file($source, $destination)) {
-        $_SESSION["image success message"] ="File uploaded successfully! ";
-    } else {
+    if(!empty($errors)){
         $_SESSION["image error message"]= "File upload failed!";
+    } elseif (move_uploaded_file($source, $destination)) {
+        $_SESSION["image success message"] = "File uploaded successfully! ";
     }
-
     // redirecting to view page
     redirect("form.php");
     exit;
