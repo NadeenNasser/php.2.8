@@ -40,16 +40,18 @@ function validate_data($data, $files)
     $errors[] = validate_min_length($data["password"], $fields[3], $minPassLen);
 
     // Image validation
-    if($mime===false) {
+    if (!file_exists($files["image"]["tmp_name"])){
+        $errors[] = "File does not exist";
+    }
+    if(filesize($files["image"]["tmp_name"]) === 0){
+        $errors[] = "File is empty";
+    }
+    // checks the content of the file regardless of the extension and validates according to it
+    if(!in_array($mime, $allowedTypes)) {
         $errors[] = "file isn't an image";
-    }else{
-        if ($files["image"]["size"] > $maxSize) {
+    }
+    if ($files["image"]["size"] > $maxSize) {
             $errors[] = "File size must be less than or equal to 2 MB";
-        }
-
-        if (!in_array($files["image"]["type"], $allowedTypes)) {
-            $errors[] = "Invalid image type";
-        }
     }
 
     //remove null objects from error array

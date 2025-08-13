@@ -15,7 +15,7 @@
    <form method="POST" action="logic.php" enctype="multipart/form-data">
 
        <label>
-           <input type="text" name="first_name" placeholder="First Name"><br><br>
+           <input type="text" name="first_name" placeholder="First Name"> <br><br>
            <input type="text" name="last_name" placeholder="last Name" ><br><br>
            <input type="email" name="email" placeholder="Email" ><br><br>
            <input type="password" name="password" placeholder="password"><br><br>
